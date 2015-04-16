@@ -1,0 +1,28 @@
+1.  Change your current working directory to laptop-as-master
+
+2.  Make sure you already installed the required modules
+
+        npm install noble
+
+3.  Start a Node.js REPL
+
+        node
+
+4.  Make sure you already have the BLE slave device advertising itself
+
+5.  Make sure your computer has BLE (Bluetooth Smart / Bluetooth 4.0) support
+
+6.  Type the following line into Node.js REPL to execute index.js
+
+        require('./index.js')
+
+7.  If you see "Two characteristics for TX and RX is OK now" without any error,
+    you can try to send data to the Tessel board now...
+
+8.  Type the following command to send some bytes to Tessel board
+
+        rx.write(new Buffer([0x03, 0x02, 0x01, 0x00]));
+
+9.  If you have a console/terminal connected to the Tessel board,
+    you should see that four bytes 03020100 was sent to RX, and
+    the same bytes is echoed back from TX...
