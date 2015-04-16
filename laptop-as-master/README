@@ -4,6 +4,9 @@
 
         npm install noble
 
+    On Linux you may need to install some Bluetooth development packages first,
+    see https://github.com/sandeepmistry/noble for more information.
+
 3.  Start a Node.js REPL as root (sudo) if you are using Linux...
 
         sudo node
