@@ -4,10 +4,13 @@
 
         npm install ble-ble113a
 
-3.  Run the code on the Tessel board that is currently connected to your computer
+3.  The program assumes you connect the BLE module to the port B on a Tessel board.
+    If that is not the case please change index.js accordingly.
+
+4.  Run the code on the Tessel board that is currently connected to your computer
 
         tessel run index.js
 
-4.  Note that to avoid bundling unnecessary files to Tessel make sure
+5.  Note that to avoid bundling unnecessary files to Tessel make sure
     you know what the commands `tessel run` and `tessel push` do...
     See  https://tessel.io/docs/cli#deploying  for more information.
