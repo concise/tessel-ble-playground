@@ -1,0 +1,88 @@
+--
+
+    關於底層通訊協定 Bluetooth Smart / Bluetooth 4.* / Bluetooth Low Energy (BLE)
+
+            https://www.bluetooth.org/en-us/specification/adopted-specifications
+
+    關於軟體上層通訊協定 Generic Attribute Profile (GATT)
+
+            https://developer.bluetooth.org/TechnologyOverview/Pages/GATT.aspx
+
+    Tessel 的 BLE 模組與 library 提供一些 API 讓你的 Tessel 開發板可以用藍芽與其他
+    設備互動，網路上有文章提到如何使用該 library 這裡簡單列出幾個：
+
+            https://tessel.io/docs/ble
+            https://tessel.io/blog/94736742342/getting-started-with-ble-tessel
+            https://github.com/tessel/ble-ble113a
+
+
+    有各種 libraries 可以協助控制個人電腦上面的 Bluetooth 晶片，
+    如果要用 Node.js 平台撰寫 JavaScript 的話有 noble 可以用：
+
+            https://github.com/sandeepmistry/noble
+--
+
+
+    範例情境
+
+
+
+        * 搭配 BLE 的 Tessel 是 Bluetooth slave device
+
+                向周圍廣播自身
+
+
+        * 筆記型電腦是 Bluetooth master device
+
+                搜尋周圍有哪些裝置
+
+
+
+
+
+
+
+--
+
+
+    範例情境
+
+
+
+        * 搭配 BLE 的 Tessel 是 GATT Server
+
+                接收來自遠端的 request 並產生 response
+
+
+        * 筆記型電腦是 GATT Client
+
+                發送 request 到遠端
+
+
+
+
+
+
+
+--
+
+    每個 GATT Server 包含數個 Services
+    每個 Services 包含數個 Characteristics
+    每個 Characteristic 包含一個 Value 、數個 Properties 、數個 Descriptors
+
+       .-------------------.    read char3     .-------------------------------------.
+       |                   | ----------------> |                                     |
+       |                   | <---------------- |  +--------------+  +--------------+ |
+       |                   |   value of char3  |  |              |  |              | |
+       |                   |                   |  |  [ char 1 ]  |  |  [ char 5 ]  | |
+       |                   |    write char1    |  |  [ char 2 ]  |  |  [ char 6 ]  | |
+       |                   | ----------------> |  |  [ char 3 ]  |  |  [ char 7 ]  | |
+       |                   | <---------------- |  |  [ char 4 ]  |  |              | |
+       |                   |   notification    |  |              |  |              | |
+       |                   |   the value of    |  +--------------+  +--------------+ |
+       |                   |   char2 has been  |     service 1         service 2     |
+       '-------------------'   changed...      '-------------------------------------'
+
+    * 筆記型電腦是 GATT Client                  * 搭配 BLE 的 Tessel 是 GATT Server
+
+--
