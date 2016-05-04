@@ -1,8 +1,44 @@
-console.log('index.js is running on the Tessel board');
+console.log('index.js starts running on the Tessel board');
 
 var tessel = require('tessel');
+
+var timer_id = setInterval(function () {
+  tessel.led[3].toggle();
+}, 500);
+
 var blelib = require('ble-ble113a');
 var peripheral = blelib.use(tessel.port['B']);
+
+var status_is_good = true;
+var status_toggle = function () {
+  if (status_is_good) {
+    status_is_good = false;
+    status_set_to_bad();
+  } else {
+    status_is_good = true;
+    status_set_to_good();
+  }
+};
+var status_set_to_good = function () {
+  tessel.led[0].write(1);
+  tessel.led[1].write(0);
+  tessel.led[2].write(0);
+  tessel.led[3].write(0);
+};
+var status_set_to_bad = function () {
+  tessel.led[0].write(0);
+  tessel.led[1].write(0);
+  tessel.led[2].write(1);
+  tessel.led[3].write(0);
+};
+tessel.button.on('press', function () {
+  console.log('the button was pressed!');
+  status_toggle();
+});
+clearInterval(timer_id);
+status_set_to_good();
+
+
 
 peripheral.on('ready', function (err) {
     console.log('BLE peripheral is ready');
