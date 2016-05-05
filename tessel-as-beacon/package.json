@@ -1,10 +1,15 @@
 {
   "name": "tessel-as-beacon",
   "version": "1.0.0",
-  "description": "",
+  "description": "Making Tessel as a BLE beacon device",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concise/tessel-ble-playground"
+  },
+  "license": "UNLICENSED",
   "dependencies": {
     "ble-ble113a": "^0.2.0",
-    "bleadvertise": "^0.1.1",
+    "bleadvertise": "^0.1.1"
   }
 }

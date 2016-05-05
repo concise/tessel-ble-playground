@@ -1,6 +1,15 @@
 console.log('INFO: Now we enter index.js');
 
+//////////////////////////////////////////////////////////////////////////////
+
 var tessel = require('tessel');
+var LED_GREEN  = tessel.led[0];
+var LED_BLUE   = tessel.led[1];
+var LED_RED    = tessel.led[2];
+var LED_ORANGE = tessel.led[3];
+
+//////////////////////////////////////////////////////////////////////////////
+
 var bleadvertise = require('bleadvertise');
 var ble_ble113a = require('ble-ble113a');
 
@@ -40,5 +49,7 @@ var tessel_ble_module = ble_ble113a.use(tessel.port['A'], function () {
     tessel_ble_module_ready_pending_task();
   }
 });
+
+//////////////////////////////////////////////////////////////////////////////
 
 console.log('INFO: Now we reach the end of index.js');
