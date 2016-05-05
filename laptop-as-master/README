@@ -7,6 +7,8 @@
     On Linux you may need to install some Bluetooth development packages first,
     see https://github.com/sandeepmistry/noble for more information.
 
+        sudo apt-get install bluetooth libbluetooth-dev libudev-dev
+
 3.  Start a Node.js REPL as root (sudo) if you are using Linux...
 
         sudo node
@@ -15,7 +17,7 @@
 
         node
 
-    On Linux we run node as root because we need to control the Bluetooth adapter
+    On Linux we run node as root since we need to control the Bluetooth adapter
 
 4.  Make sure you already have the BLE slave device advertising itself
 
