@@ -1,13 +1,13 @@
 {
   "name": "laptop-as-master",
   "version": "1.0.0",
-  "description": "",
+  "description": "Using a ThinkPad to connect to Tessel BLE",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concise/tessel-ble-playground"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "noble": "^0.3.13"
   }

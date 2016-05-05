@@ -9,6 +9,9 @@ noble.startScanning();
 
 noble.on('scanStart', function () {
     console.log('Scanning is started');
+    setTimeout(function () {
+        noble.stopScanning();
+    }, 3000);
 });
 
 noble.on('scanStop', function () {

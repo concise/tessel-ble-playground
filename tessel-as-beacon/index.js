@@ -55,7 +55,11 @@ var advertise_new_mfr_data = function (new_mfr_data) {
   }
 
   LED_BLUE.write(1);
-  var ad_data = bleadvertise.serialize({ flags: [0x04], mfrData: new_mfr_data });
+  var ad_data = bleadvertise.serialize({
+    flags: [0x04],
+    mfrData: new_mfr_data,
+    completeName: 'ndsensor'
+  });
   tessel_ble_module.stopAdvertising(function () {
     console.log('Tessel BLE module stops advertising itself');
     tessel_ble_module.setAdvertisingData(ad_data, function () {
