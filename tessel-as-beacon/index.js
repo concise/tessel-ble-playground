@@ -33,7 +33,7 @@ var sensor_error_code_toggle_good_or_bad = function () {
 };
 
 tessel.button.on('press', function () {
-  console.log('INFO: The config button on Tessel main board is pressed');
+  console.log('Tessel main board config button is pressed');
   sensor_error_code_toggle_good_or_bad();
 });
 
@@ -44,13 +44,12 @@ var ble_ble113a = require('ble-ble113a');
 
 var tessel_ble_module_ready = false;
 var tessel_ble_module_ready_pending_task = null;
-var default_mfr_data = [0xab, 0xcd, 0xef, 0x00];
 
 var advertise_new_mfr_data = function (new_mfr_data) {
   new_mfr_data = new Buffer(new_mfr_data);
 
   if (!tessel_ble_module_ready) {
-    console.log('WARNING: Ignore advertise_new_mfr_data() function call since Tessel BLE module is not ready');
+    console.log('WARNING: Pending opertaion since Tessel BLE module is not ready');
     tessel_ble_module_ready_pending_task = function () { advertise_new_mfr_data(new_mfr_data); };
     return false;
   }
@@ -75,7 +74,7 @@ var tessel_ble_module = ble_ble113a.use(tessel.port['A'], function () {
   console.log('Tessel BLE module is ready');
 
   if (tessel_ble_module_ready_pending_task === null) {
-    advertise_new_mfr_data(default_mfr_data);
+    sensor_error_code_set_to_good();
   } else {
     tessel_ble_module_ready_pending_task();
   }
