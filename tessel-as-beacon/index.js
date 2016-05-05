@@ -14,14 +14,14 @@ var sensor_error_code_set_to_good = function () {
   sensor_error_code = 0;
   LED_GREEN.write(1);
   LED_RED.write(0);
-  advertise_new_mfr_data([0xab, 0xcd, 0xef, 0x00]);
+  advertise_new_mfr_data([sensor_error_code]);
 };
 
 var sensor_error_code_set_to_bad = function () {
   sensor_error_code = 1;
   LED_GREEN.write(0);
   LED_RED.write(1);
-  advertise_new_mfr_data([0xab, 0xcd, 0xef, 0x01]);
+  advertise_new_mfr_data([sensor_error_code]);
 };
 
 var sensor_error_code_toggle_good_or_bad = function () {
