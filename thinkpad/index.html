@@ -25,11 +25,12 @@
       };
 
       /*
-      http_post('/view', '',
-        result => console.log(
-          JSON.parse(result)
-        )
-      );
+      id = setInterval(_ => http_post('/view', '', result => console.log(result)), 1000)
+      clearInterval(id)
+
+      http_post('/moni', 'ndsensor-1', result => console.log(result))
+
+      http_post('/dismoni', 'ndsensor-1', result => console.log(result))
       */
 
     </script>

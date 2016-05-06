@@ -107,8 +107,17 @@ require('./httpserver.js').run(function (set_port, set_hostname, set_handler) {
     });
 
     set_handler('POST /view', function (send_response, request_body, request_headers) {
-        var body = new Buffer(view, 'utf8');
-        send_response(body, {'Content-Type': 'application/octet-stream'});
+        send_response(new Buffer(view, 'utf8'), {'Content-Type': 'application/octet-stream'});
+    });
+
+    set_handler('POST /moni', function (send_response, request_body, request_headers) {
+        enable_monitoring(request_body.toString());
+        send_response(new Buffer('ok', 'utf8'), {'Content-Type': 'application/octet-stream'});
+    });
+
+    set_handler('POST /dismoni', function (send_response, request_body, request_headers) {
+        disable_monitoring(request_body.toString());
+        send_response(new Buffer('ok', 'utf8'), {'Content-Type': 'application/octet-stream'});
     });
 
 });
