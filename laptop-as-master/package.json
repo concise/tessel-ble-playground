@@ -9,6 +9,6 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
-    "noble": "^0.3.13"
+    "noble": "^1.5.0"
   }
 }

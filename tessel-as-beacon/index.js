@@ -1,5 +1,9 @@
 console.log('INFO: Now we enter index.js');
 
+var DEVICE_NAME = (process.argv.length === 3) ? process.argv[2] : 'ndsensor-0';
+
+console.log('INFO: DEVICE_NAME="%s"', DEVICE_NAME);
+
 //////////////////////////////////////////////////////////////////////////////
 
 var tessel = require('tessel');
@@ -58,7 +62,7 @@ var advertise_new_mfr_data = function (new_mfr_data) {
   var ad_data = bleadvertise.serialize({
     flags: [0x04],
     mfrData: new_mfr_data,
-    completeName: 'ndsensor'
+    completeName: DEVICE_NAME
   });
   tessel_ble_module.stopAdvertising(function () {
     console.log('Tessel BLE module stops advertising itself');
