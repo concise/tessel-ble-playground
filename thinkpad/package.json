@@ -1,0 +1,14 @@
+{
+  "name": "thinkpad",
+  "version": "1.0.0",
+  "description": "Using a ThinkPad to scan for my custom Tessel beacons",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/concise/tessel-ble-playground"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "noble": "^1.5.0"
+  }
+}
