@@ -75,28 +75,14 @@ var do_respond_to_an_HTTP_request = function (req, res) {
   });
 };
 
-var stop_accepting_new_connections = function () {
-  console.log('');
-  console.log('* SIGINT (CTRL-C) detected.');
-  console.log('* The HTTP server will be stopped...');
-  srv.close();
-};
-
-var stop_this_process = function () {
-  console.log('');
-  console.log('* SIGINT (CTRL-C) detected more than once.');
-  console.log('* Force quit this Node.js program...');
-  process.exit(0);
-};
-
-var SIGINT_handled = false;
-
 process.on('SIGINT', function () {
-  if (SIGINT_handled)
-    return stop_this_process();
-  SIGINT_handled = true;
-  stop_accepting_new_connections();
-});
+  this.SIGINT_handled += 1;
+  if (this.SIGINT_handled === 1) {
+    console.log('');
+    console.log('* SIGINT (CTRL-C) detected, stopping the HTTP server...');
+    srv.close();
+  }
+}.bind({SIGINT_handled: 0}));
 
 srv.on('request', do_respond_to_an_HTTP_request);
 

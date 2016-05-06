@@ -19,6 +19,22 @@ noble.on('discover', function (device) {
     }
 });
 
+process.on('SIGINT', function () {
+    this.SIGINT_handled += 1;
+    if (this.SIGINT_handled === 1) {
+        this.SIGINT_handled = 1;
+        console.log('');
+        console.log('* SIGINT (CTRL-C) detected, stopping BLE scanning...');
+        noble.removeAllListeners();
+        noble.stopScanning();
+    } else if (this.SIGINT_handled === 3) {
+        console.log('');
+        console.log('* SIGINT (CTRL-C) 3 times, quitting this process...');
+        process.exit(0);
+    }
+}.bind({SIGINT_handled: 0}));
+
+
 
 
 var sensors = {};
