@@ -11,7 +11,7 @@ noble.on('discover', function (device) {
     var rssi = device.rssi;
     var name = device.advertisement.localName || '';
     var data = device.advertisement.manufacturerData;
-    var stat = (data.length === 1 && data[0] === 0) ? 0 : 1;
+    var stat = (data && data.length === 1 && data[0] === 0) ? 0 : 1;
     if (name.startsWith('ndsensor-')) {
         console.log('%s %d (time=%d rssi=%ddbm)',
             name, stat, time, rssi
