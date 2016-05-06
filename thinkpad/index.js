@@ -13,7 +13,7 @@ noble.on('discover', function (device) {
     var data = device.advertisement.manufacturerData;
     var stat = (data.length === 1 && data[0] === 0) ? 0 : 1;
     if (name.startsWith('ndsensor-')) {
-        console.log('%d %s (-%d dbm) %d',
+        console.log('%d %s (%d dbm) %d',
             time, name, rssi, stat
         );
     }
