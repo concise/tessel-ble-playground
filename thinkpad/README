@@ -1,0 +1,2 @@
+npm install noble
+sudo "$(type -P node)" index.js
