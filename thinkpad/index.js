@@ -37,15 +37,12 @@ var view = '[]';
 
 var update_view = function () {
     var all = [];
-    for (var name in sensors) {
+    var names = Object.keys(sensors).sort();
+    for (var name of names) {
         var moni = sensors[name].moni;
         var gone = sensors[name].gone;
         var stat = sensors[name].stat;
-        all.push({
-            name: name,
-            moni: moni,
-            stat: gone ? 'GONE' : stat === 0 ? 'GOOD' : 'BAD'
-        });
+        all.push([ name, moni, (gone ? '?' : stat === 0 ? 'O' : 'X') ]);
     }
     view = JSON.stringify(all);
 };
