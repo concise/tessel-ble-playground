@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ndsensor monitor</title>
+  </head>
+  <body>
+    <h1>ndsensor monitor</h1>
+    <script>
+      var http_post = function (where, text_to_send, callback) {
+        if (typeof where !== 'string') throw TypeError();
+        if (typeof text_to_send !== 'string') throw TypeError();
+        if (typeof callback !== 'function') throw TypeError();
+
+        fetch(where, {method: 'POST', body: text_to_send})
+          .then(function (response) {
+            return response.text();
+          })
+          .then(function (server_response_text) {
+            callback(server_response_text);
+          })
+          .catch(function (err) {
+            callback(null, err);
+          });
+      };
+
+      /*
+      http_post('/view', '',
+        result => console.log(
+          JSON.parse(result)
+        )
+      );
+      */
+
+    </script>
+  </body>
+</html>
