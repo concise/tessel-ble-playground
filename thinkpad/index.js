@@ -13,8 +13,8 @@ noble.on('discover', function (device) {
     var data = device.advertisement.manufacturerData;
     var stat = (data.length === 1 && data[0] === 0) ? 0 : 1;
     if (name.startsWith('ndsensor-')) {
-        console.log('%s %d %ddbm %d',
-            name, stat, rssi, time
+        console.log('%s %d (time=%d rssi=%ddbm)',
+            name, stat, time, rssi
         );
     }
 });
