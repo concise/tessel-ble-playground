@@ -27,9 +27,9 @@ process.on('SIGINT', function () {
         console.log('* SIGINT (CTRL-C) detected, stopping BLE scanning...');
         noble.removeAllListeners();
         noble.stopScanning();
-    } else if (this.SIGINT_handled === 3) {
+    } else if (this.SIGINT_handled === 2) {
         console.log('');
-        console.log('* SIGINT (CTRL-C) 3 times, quitting this process...');
+        console.log('* SIGINT (CTRL-C) 2 times, quitting this process...');
         process.exit(0);
     }
 }.bind({SIGINT_handled: 0}));
@@ -119,18 +119,18 @@ require('./httpserver.js').run(function (set_port, set_hostname, set_handler) {
         });
     });
 
-    set_handler('POST /view', function (send_response, request_body, request_headers) {
-        send_response(new Buffer(view, 'utf8'), {'Content-Type': 'application/octet-stream'});
+    set_handler('POST /view', function (send_response) {
+        send_response(new Buffer(view));
     });
 
-    set_handler('POST /moni', function (send_response, request_body, request_headers) {
+    set_handler('POST /moni', function (send_response, request_body) {
         enable_monitoring(request_body.toString());
-        send_response(new Buffer('ok', 'utf8'), {'Content-Type': 'application/octet-stream'});
+        send_response(new Buffer(0));
     });
 
-    set_handler('POST /dismoni', function (send_response, request_body, request_headers) {
+    set_handler('POST /dismoni', function (send_response, request_body) {
         disable_monitoring(request_body.toString());
-        send_response(new Buffer('ok', 'utf8'), {'Content-Type': 'application/octet-stream'});
+        send_response(new Buffer(0));
     });
 
 });

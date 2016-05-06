@@ -1,8 +1,8 @@
 var assert = require('assert');
 var http = require('http');
 
-var DEFAULT_PORT = 2015;
-var DEFAULT_HOSTNAME = '127.0.0.1';
+var DEFAULT_PORT = 8000;
+var DEFAULT_HOSTNAME = '0.0.0.0';
 
 var srv = http.createServer();
 var port = DEFAULT_PORT;
