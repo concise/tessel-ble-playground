@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>ndsensor monitor</title>
     <style>
-      body {
+      html {
         margin-top: 32px;
+        font-family: monospace;
       }
       .sensor {
         display: inline-block;
@@ -26,10 +27,14 @@
       .moni, .name, .stat {
         margin: 8px 0;
       }
+      #container {
+        text-align: center;
+      }
     </style>
   </head>
   <body>
     <div id="container"></div>
+    <p style="text-align:center;">(If a sensor is "monitored", you'll be notified if it's gone.)</p>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var http_post = function (where, text_to_send, callback) {
@@ -63,17 +68,17 @@
           var stat = tuple[2];
           var html = (''
             + '<div class="sensor' + (moni ? ' monitored' : '') + '">'
-            +   '<div class="moni" style="color:' + (moni?'#000':'#bbb') + '">'
-            +     (moni ? 'monitored' : 'not monitored')
-            +   '</div>'
-            +   '<div class="name" style="color:' + ({'O':'#00bb00','X':'#ff0000','?':'#ffbf00'}[stat]) + '">'
+            +   '<div class="name" style="color:' + ({'O':'#00aa00','X':'#aa0000','?':'#ffbf00'}[stat]) + '">'
             +     name
             +   '</div>'
-            +   '<div class="stat" style="color:' + ({'O':'#00bb00','X':'#ff0000','?':'#ffbf00'}[stat]) + '">'
+            +   '<div class="stat" style="color:#fff;background-color:' + ({'O':'#00aa00','X':'#aa0000','?':'#ffbf00'}[stat]) + '">'
             +     (stat === 'O' ? 'Good' :
                    stat === 'X' ? 'Bad' :
                    stat === '?' ? 'Not Found' :
                    'Unknown Error')
+            +   '</div>'
+            +   '<div class="moni" style="color:' + (moni?'#000':'#bbb') + '">'
+            +     (moni ? 'monitored' : 'not monitored')
             +   '</div>'
             + '</div>'
           );
