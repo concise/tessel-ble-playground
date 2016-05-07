@@ -3,9 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>ndsensor monitor</title>
+    <style>
+      .sensor {
+        display: inline-block;
+        margin: 32px;
+        width: 160px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <h1>ndsensor monitor</h1>
+    <div id="container"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var http_post = function (where, text_to_send, callback) {
@@ -31,20 +39,46 @@
 
       var current_view = [];
       function render(new_view) {
-          current_view = new_view;
-          console.log(JSON.stringify(current_view));
+        current_view = new_view;
+        console.log(JSON.stringify(current_view));
+        container.innerHTML = current_view.map(tuple => {
+          var name = tuple[0];
+          var moni = tuple[1];
+          var stat = tuple[2];
+          var html = (''
+            + '<div class="sensor">'
+            +   '<div class="name">'
+            +     name
+            +   '</div>'
+            +   '<div class="moni">'
+            +     (moni ? 'monitored' : 'not monitored')
+            +   '</div>'
+            +   '<div class="stat">'
+            +     (stat === 'O' ? 'Good' :
+                  stat === 'X' ? 'Bad' :
+                  stat === '?' ? 'Not found' :
+                  'Unknown Error')
+            +   '</div>'
+            + '</div>'
+          );
+          return html;
+        }).join('');
       }
 
-      /*
+      var container = document.getElementById('container');
 
-      id = setInterval(()=>{  http_post('/view', '', result => console.log(result))  }, 1000)
-      clearInterval(id)
-
-      http_post('/moni', 'ndsensor-1', ()=>{})
-
-      http_post('/dismoni', 'ndsensor-1', ()=>{})
-
-      */
+      container.addEventListener('click', function (evt) {
+        var target = evt.target;
+        if (target && target.className === 'moni') {
+          var name = target.parentNode.childNodes[0].textContent;
+          console.log(name, 'clicked!');
+          if (target.textContent === 'monitored') {
+            http_post('/dismoni', name, ()=>{})
+          } else {
+            http_post('/moni', name, ()=>{})
+          }
+        }
+      });
 
     </script>
   </body>
