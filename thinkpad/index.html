@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>ndsensor monitor</h1>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
       var http_post = function (where, text_to_send, callback) {
         if (typeof where !== 'string') throw TypeError();
@@ -23,6 +24,16 @@
             callback(null, err);
           });
       };
+
+      var socket = io('http://' + location.host + '/');
+
+      socket.on('view_updated', render);
+
+      var current_view = [];
+      function render(new_view) {
+          current_view = new_view;
+          console.log(current_view);
+      }
 
       /*
 

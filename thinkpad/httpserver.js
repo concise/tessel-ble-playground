@@ -100,3 +100,5 @@ exports.run = function (configs) {
   configs(port_setter, hostname_setter, handler_setter);
   srv.listen(port, hostname);
 };
+
+exports.srv = srv;

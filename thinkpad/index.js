@@ -60,7 +60,12 @@ var update_view = function () {
         var stat = sensors[name].stat;
         all.push([ name, moni, (gone ? '?' : stat === 0 ? 'O' : 'X') ]);
     }
-    view = JSON.stringify(all);
+    var new_view = JSON.stringify(all);
+
+    if (view !== new_view) {
+        view = new_view;
+        io.emit('view_updated', all);
+    }
 };
 
 var sensor_discovery_handler = function (name, stat) {
@@ -134,3 +139,5 @@ require('./httpserver.js').run(function (set_port, set_hostname, set_handler) {
     });
 
 });
+
+var io = require('socket.io')(require('./httpserver.js').srv);
