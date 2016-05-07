@@ -7,11 +7,21 @@
       .sensor {
         display: inline-block;
         padding: 16px 8px;
+        margin: 4px;
         width: 100px;
         text-align: center;
       }
       .moni {
         cursor: pointer;
+      }
+      .sensor {
+        border: 1px dashed #aaaaaa;
+      }
+      .sensor.monitored {
+        border: 1px solid #000000;
+      }
+      .moni, .name, .stat {
+        margin: 8px 0;
       }
     </style>
   </head>
@@ -49,18 +59,18 @@
           var moni = tuple[1];
           var stat = tuple[2];
           var html = (''
-            + '<div class="sensor">'
-            +   '<div class="name">'
-            +     name
-            +   '</div>'
-            +   '<div class="moni">'
+            + '<div class="sensor' + (moni ? ' monitored' : '') + '">'
+            +   '<div class="moni" style="color:' + (moni?'#000':'#bbb') + '">'
             +     (moni ? 'monitored' : 'not monitored')
             +   '</div>'
-            +   '<div class="stat">'
+            +   '<div class="name" style="color:' + ({'O':'#00bb00','X':'#ff0000','?':'#ffbf00'}[stat]) + '">'
+            +     name
+            +   '</div>'
+            +   '<div class="stat" style="color:' + ({'O':'#00bb00','X':'#ff0000','?':'#ffbf00'}[stat]) + '">'
             +     (stat === 'O' ? 'Good' :
-                  stat === 'X' ? 'Bad' :
-                  stat === '?' ? 'Not Found' :
-                  'Unknown Error')
+                   stat === 'X' ? 'Bad' :
+                   stat === '?' ? 'Not Found' :
+                   'Unknown Error')
             +   '</div>'
             + '</div>'
           );
@@ -73,7 +83,7 @@
       container.addEventListener('click', function (evt) {
         var target = evt.target;
         if (target && target.className === 'moni') {
-          var name = target.parentNode.childNodes[0].textContent;
+          var name = target.parentNode.querySelector('.name').textContent;
           console.log(name, 'clicked!');
           if (target.textContent === 'monitored') {
             http_post('/dismoni', name, ()=>{})
