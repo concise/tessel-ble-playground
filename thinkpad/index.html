@@ -68,10 +68,10 @@
           var stat = tuple[2];
           var html = (''
             + '<div class="sensor' + (moni ? ' monitored' : '') + '">'
-            +   '<div class="name" style="color:' + ({'O':'#00aa00','X':'#aa0000','?':'#ffbf00'}[stat]) + '">'
+            +   '<div class="name" style="color:' + ({'O':'#00aa00','X':'#aa0000','?':'#ccab33'}[stat]) + '">'
             +     name
             +   '</div>'
-            +   '<div class="stat" style="color:#fff;background-color:' + ({'O':'#00aa00','X':'#aa0000','?':'#ffbf00'}[stat]) + '">'
+            +   '<div class="stat" style="color:#fff;background-color:' + ({'O':'#00aa00','X':'#aa0000','?':'#ccab33'}[stat]) + '">'
             +     (stat === 'O' ? 'Good' :
                    stat === 'X' ? 'Bad' :
                    stat === '?' ? 'Not Found' :
