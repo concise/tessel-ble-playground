@@ -141,3 +141,7 @@ require('./httpserver.js').run(function (set_port, set_hostname, set_handler) {
 });
 
 var io = require('socket.io')(require('./httpserver.js').srv);
+io.on('connection', function (socket) {
+  socket.emit('view_updated', JSON.parse(view));
+});
+
