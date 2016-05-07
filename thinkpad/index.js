@@ -118,7 +118,7 @@ require('./httpserver.js').run(function (set_port, set_hostname, set_handler) {
     set_hostname('0.0.0.0');
 
     set_handler('GET /', function (send_response) {
-        require('fs').readFile('index.html', function (err, data) {
+        require('fs').readFile(__dirname + '/index.html', function (err, data) {
             if (err) throw err;
             send_response(data, {'Content-Type': 'text/html; charset=utf-8'});
         });
