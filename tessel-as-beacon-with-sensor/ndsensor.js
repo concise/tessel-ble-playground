@@ -30,7 +30,7 @@ var tessel = require('tessel');
         case 4:
             tmp = input_pin_analog.read();
             output_pin.write(1);
-            internal_state_phase_1 += (tmp >= 0.95) ? 1 : 0;
+            internal_state_phase_1 += (tmp >= 0.91) ? 1 : 0;
             if (i === 4) {
                 var is_good = (internal_state_phase_1 >= 3) && (internal_state_phase_2 >= 3);
                 console.log('[sensor] %d %d => result: %s', internal_state_phase_1, internal_state_phase_2, (is_good ? 'GOOD' : 'BAD'));
@@ -51,7 +51,7 @@ var tessel = require('tessel');
         case 9:
             tmp = input_pin_analog.read();
             output_pin.write(0);
-            internal_state_phase_2 += (tmp <= 0.05) ? 1 : 0;
+            internal_state_phase_2 += (tmp <= 0.09) ? 1 : 0;
             if (i === 9) {
                 var is_good = (internal_state_phase_1 >= 3) && (internal_state_phase_2 >= 3);
                 console.log('[sensor] %d %d => result: %s', internal_state_phase_1, internal_state_phase_2, (is_good ? 'GOOD' : 'BAD'));
