@@ -1,0 +1,8 @@
+need spec documents so that we can do DIY/ODM/OEM...
+- what features do we actually want precisely ???
+- what does a good sensor circuit look like ???
+- the power consumption of sensor ???
+- the power consumption of bluetooth advertisement ???
+- do we only need one-way communication (BLE beacon) ???
+- what application logic do we want to deploy on the hardware ???
+- how to customized a hardware (for example, we will need to assign each hardware a unique human readable name, the settings should be stored persistently across system reboots) ???

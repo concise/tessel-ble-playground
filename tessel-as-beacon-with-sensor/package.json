@@ -2,7 +2,7 @@
   "name": "tessel-as-beacon",
   "version": "1.0.0",
   "description": "Making Tessel as a BLE beacon device",
-  "main": "index.js",
+  "main": "ndsensor.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/concise/tessel-ble-playground"
