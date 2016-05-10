@@ -104,6 +104,9 @@ var enable_monitoring = function (name) {
 };
 
 var disable_monitoring = function (name) {
+    if (sensors[name] && sensors[name].gone) {
+            delete sensors[name];
+    }
     if (sensors[name]) {
         sensors[name].moni = false;
     }
