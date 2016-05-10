@@ -13,7 +13,7 @@ var tessel = require('tessel');
 
     var tessel = require('tessel');
     var output_pin = tessel.port['GPIO'].pin['G2'];
-    var input_pin = tessel.port['GPIO'].pin['G3'];
+    var input_pin_analog = tessel.port['GPIO'].pin['A6'];
     var internal_state_phase_1 = 0;
     var internal_state_phase_2 = 0;
 
@@ -22,16 +22,15 @@ var tessel = require('tessel');
         switch (i) {
         case 0:
             output_pin.write(1);
-            input_pin.pull('pulldown');
             internal_state_phase_1 = 0;
             break;
         case 1:
         case 2:
         case 3:
         case 4:
-            tmp = input_pin.read();
-            input_pin.pull('pulldown');
-            internal_state_phase_1 += (tmp === 1) ? 1 : 0;
+            tmp = input_pin_analog.read();
+            output_pin.write(1);
+            internal_state_phase_1 += (tmp >= 0.8) ? 1 : 0;
             if (i === 4) {
                 var is_good = (internal_state_phase_1 >= 3) && (internal_state_phase_2 >= 3);
                 console.log('[sensor] %d %d => result: %s', internal_state_phase_1, internal_state_phase_2, (is_good ? 'GOOD' : 'BAD'));
@@ -44,16 +43,15 @@ var tessel = require('tessel');
             break;
         case 5:
             output_pin.write(0);
-            input_pin.pull('pullup');
             internal_state_phase_2 = 0;
             break;
         case 6:
         case 7:
         case 8:
         case 9:
-            tmp = input_pin.read();
-            input_pin.pull('pullup');
-            internal_state_phase_2 += (tmp === 0) ? 1 : 0;
+            tmp = input_pin_analog.read();
+            output_pin.write(0);
+            internal_state_phase_2 += (tmp <= 0.2) ? 1 : 0;
             if (i === 9) {
                 var is_good = (internal_state_phase_1 >= 3) && (internal_state_phase_2 >= 3);
                 console.log('[sensor] %d %d => result: %s', internal_state_phase_1, internal_state_phase_2, (is_good ? 'GOOD' : 'BAD'));
