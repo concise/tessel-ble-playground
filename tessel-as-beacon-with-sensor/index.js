@@ -105,9 +105,17 @@ var tessel_ble_module = ble_ble113a.use(tessel.port['A'], function () {
 //      0.99 V | - - - - - - - - - - - - - - - - - - -
 //             |                LOW
 //      0.00 V +-------------------------------------->
+//
+
 
 var at_least_once = false;
 var last_status = 0;    // 0 is BAD; 1 is GOOD
+
+var a1 = require('tessel').port['GPIO'].pin['A1'];
+
+var a2 = require('tessel').port['GPIO'].pin['A2'];
+
+
 
 var opin = require('tessel').port['GPIO'].pin['G2'];
 var ipin = require('tessel').port['GPIO'].pin['G3'];
@@ -131,6 +139,16 @@ function check_status() {
 }
 
 setInterval(check_status, SCAN_PERIOD, false);
+
+//////////////////////////////////////////////////////////////////////////////
+
+var ref_state = 0;
+(function(){
+    var a1 = require('tessel').port['GPIO'].pin['A1'];
+    var a2 = require('tessel').port['GPIO'].pin['A2'];
+    var toggle = function () { ref_state ^= 1; a1.write(ref_state); setTimeout(toggle, 500); };
+    toggle();
+}());
 
 //////////////////////////////////////////////////////////////////////////////
 
